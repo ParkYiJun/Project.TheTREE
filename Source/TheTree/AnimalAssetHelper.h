@@ -14,40 +14,6 @@
 /**
  * 
  */
-USTRUCT(BlueprintType)
-struct FAnimalAssetTableRow :public FTableRowBase
-{
-    GENERATED_USTRUCT_BODY()
-
-public:
-    FAnimalAssetTableRow() :
-        Title("")
-        , StrikingPower(0)
-        , PowerVariation(0)
-    {}
-
-    /** 'Name' row is AnimalCode. */
-
-    /** 'Title' row is AnimalName. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        FString Title;
-
-    /** 'StrikingPower' row is Animal's Striking Power. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        uint8 StrikingPower;
-
-    /** 'PowerVariation' row is Animal's Striking Power Variation. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        uint8 PowerVariation;
-
-    /** AnimalCode에 맞는 동물 SkeletalMesh. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        TSoftObjectPtr<class USkeletalMesh> AnimalSKMesh;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        TSoftObjectPtr<class UStaticMesh> AnimalHabitatSTMesh;
-
-};
 
 USTRUCT(BlueprintType)
 struct FST_Load
