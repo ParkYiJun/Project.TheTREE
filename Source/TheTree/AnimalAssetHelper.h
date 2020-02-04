@@ -8,44 +8,56 @@
 #include "UObject/Object.h"
 #include "UObject/ScriptMacros.h"
 #include "Engine/DataTable.h"
+#include "Animation/AnimInstance.h"
 #include "AnimalAssetHelper.generated.h"
 
 /**
  * 
  */
+
 USTRUCT(BlueprintType)
-struct FAnimalAssetTableRow :public FTableRowBase
+struct FST_Load
 {
     GENERATED_USTRUCT_BODY()
 
 public:
-    FAnimalAssetTableRow() :
-        Title("")
-        , StrikingPower(0)
-        , PowerVariation(0)
-    {}
+    FST_Load() {}
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        TSoftObjectPtr<class USkeletalMesh> AnimalSkeletalMesh;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        TSoftClassPtr<class UAnimInstance> AnimalAnimBPClass;
 
-    /** 'Name' row is AnimalCode. */
+};
 
-    /** 'Title' row is AnimalName. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
+USTRUCT(BlueprintType)
+struct FST_Dictionary 
+{
+    GENERATED_USTRUCT_BODY()
+
+public:
+    FST_Dictionary(){}
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
         FString Title;
-
-    /** 'StrikingPower' row is Animal's Striking Power. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        FST_Load AnimalLoad;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = AnimalState)
         uint8 StrikingPower;
-
-    /** 'PowerVariation' row is Animal's Striking Power Variation. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = AnimalState)
         uint8 PowerVariation;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dictionary)
+        bool IsSettled;
+};
 
-    /** AnimalCode에 맞는 동물 SkeletalMesh. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        TSoftObjectPtr<class USkeletalMesh> AnimalSKMesh;
+USTRUCT(BlueprintType)
+struct FST_Settle
+{
+    GENERATED_USTRUCT_BODY()
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimalAsset)
-        TSoftObjectPtr<class UStaticMesh> AnimalHabitatSTMesh;
-
+public:
+    FST_Settle() {}
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        TSoftObjectPtr<class UStaticMesh> Habitat;
 };
 
 
